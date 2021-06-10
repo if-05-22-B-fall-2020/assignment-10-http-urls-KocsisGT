@@ -21,3 +21,19 @@
  * PROVIDED HEREUNDER IS PROVIDED "AS IS". HTBLA LEONDING HAS NO OBLIGATION
  * TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
  */
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class HttpUrlChecker{
+    public static Matcher getMatcher(String url){
+        //(http)(s)?(://)(www.)?[a-zA-Z0-9](.)+[a-z]+
+        //(http)(s)?(://)(www.)?[a-zA-Z0-9](?!.[-])(.)+[a-z]+
+        //(http)(s)?(://)(www.)?[a-zA-Z0-9](?!.*[-])(.)+[a-z]+
+        //^((http)s?://)(www.)?([a-z]|[A-Z]|[0-9])+(-([a-z]|[A-Z]|[0-9])+)*(.[a-z]+)+$
+        //^((http)s?://)(www.)?([a-zA-Z0-9])+(-([a-zA-Z0-9])+)*(.[a-z]+)+$
+        Pattern pattern = Pattern.compile("^((http)s?://)(www.)?([a-zA-Z0-9])+(-([a-zA-Z0-9])+)*(.[a-z]+)+$");
+        Matcher matcher = pattern.matcher(url);
+        return matcher;
+    }
+}
